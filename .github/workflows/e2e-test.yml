@@ -45,7 +45,7 @@ jobs:
 
       - name: Download aws-lambda-update-function binary
         run: |
-          wget https://github.com/CodeZombieCH/aws-lambda-update-function/releases/download/v0.1/update-linux-amd64
+          wget --no-verbose https://github.com/CodeZombieCH/aws-lambda-update-function/releases/download/v0.1/update-linux-amd64
           chmod +x update-linux-amd64
 
       - name: Update AWS Lambda function
