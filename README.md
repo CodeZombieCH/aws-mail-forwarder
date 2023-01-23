@@ -76,11 +76,13 @@ See example config file [`config.example.json`](build/config.example.json)
 
 The following debugging headers are added to the message sent:
 
-- `X-Forwarder-Message-Id`: The unique ID assigned to the email by Amazon SES
+- `X-Forwarder-Message-Id`:<br>
+  The unique ID assigned to the email by Amazon SES
   The message ID is used:
   - by SES as the key of the message stored in the S3 bucket after receiving a message
   - by the lambda function as the key of the message stored in the S3 bucket after sending a forwarded message
-- `X-Forwarder-Original-From`: The original `From` header
+- `X-Forwarder-Original-From`:<br>
+  The original `From` header
 
 
 ## History
