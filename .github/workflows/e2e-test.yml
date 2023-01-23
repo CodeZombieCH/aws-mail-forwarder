@@ -1,0 +1,68 @@
+name: e2e Test
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+  workflow_dispatch:
+
+jobs:
+
+  e2e-test:
+    runs-on: ubuntu-latest
+
+    environment: github-action
+    env:
+      BUILD_DIR: build/
+
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version-file: 'go.mod'
+          cache: true
+
+      - name: Build
+        run: |
+          GOOS=linux GOARCH=amd64 go build -o ${BUILD_DIR}lambda ./cmd/lambda
+
+      - name: Write config.json
+        run: |
+          printenv CONFIG_JSON >"${BUILD_DIR}config.json"
+        env:
+          CONFIG_JSON: ${{ secrets.CONFIG_JSON }}
+          
+      - name: Create lambda.zip archive
+        run: |
+          cd ${BUILD_DIR}
+          if [ -f lambda.zip ]; then rm lambda.zip; fi
+          zip lambda.zip -r .
+          cd -
+
+      - name: Download aws-lambda-update-function binary
+        run: |
+          wget https://github.com/CodeZombieCH/aws-lambda-update-function/releases/download/v0.1/update-linux-amd64
+          chmod +x update-linux-amd64
+
+      - name: Update AWS Lambda function
+        run: |
+          ./update-linux-amd64 --function-name "$AWS_LAMBDA_FUNCTION_NAME" --zip-file "${BUILD_DIR}lambda.zip"
+        env:
+          AWS_LAMBDA_FUNCTION_NAME: ${{ secrets.AWS_LAMBDA_FUNCTION_NAME }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Run e2e test
+        run: go test -v -tags="e2e" ./e2e
+        env:
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          TESTMAILAPP_APIKEY: ${{ secrets.TESTMAILAPP_APIKEY }}
+          TESTMAILAPP_NAMESPACE: ${{ secrets.TESTMAILAPP_NAMESPACE }}
+          TESTMAILAPP_TAG: ${{ secrets.TESTMAILAPP_TAG }}
