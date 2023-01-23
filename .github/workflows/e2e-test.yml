@@ -60,6 +60,8 @@ jobs:
       - name: Run e2e test
         run: go test -v -tags="e2e" ./e2e
         env:
+          SENDER: ${{ secrets.SENDER }}
+          RECIPIENT: ${{ secrets.RECIPIENT }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
