@@ -1,0 +1,14 @@
+{
+    "gopls": {
+        "build.buildFlags": [
+            "-tags=integration,e2e"
+        ]
+    },
+    "cSpell.words": [
+        "awsconfig",
+        "codezombiech",
+        "etag",
+        "sesv2",
+        "testdata"
+    ]
+}

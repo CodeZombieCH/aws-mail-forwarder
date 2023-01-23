@@ -1,0 +1,33 @@
+{
+    "fromEmail": "forwarder@your-domain.tld",
+    "subjectPrefix": "",
+    "allowPlusSign": true,
+    "forwardMapping": {
+        "john@your-domain.tld": [
+            "john.doe@some-other-domain.tld"
+        ],
+        "jane@your-domain.tld": [
+            "jane.doe@some-other-domain.tld"
+        ],
+        "@your-domain.tld": [
+            "john.doe@some-other-domain.tld",
+            "jane.doe@some-other-domain.tld"
+        ],
+        "@": [
+            "admin@some-other-domain.tld"
+        ]
+    },
+    "s3": {
+        "bucketName": "aws-mail-forwarder",
+        "incoming": {
+            "newPrefix": "in/new/",
+            "spamVirusPrefix": "in/spam-virus/",
+            "forwardedPrefix": "in/forwarded/",
+            "failedPrefix": "in/failed/"
+        },
+        "outgoing": {
+            "sentPrefix": "out/sent/",
+            "failedPrefix": "out/failed/"
+        }
+    }
+}

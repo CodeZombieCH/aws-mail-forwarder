@@ -1,0 +1,2 @@
+# Ensure stored mails use line delimiter specified in RFC5322
+*.eml	text eol=crlf

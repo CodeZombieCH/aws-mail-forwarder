@@ -1,0 +1,33 @@
+{
+    "fromEmail": "from@example.net",
+    "subjectPrefix": "Prefix: ",
+    "allowPlusSign": false,
+    "forwardMapping": {
+        "@example.com": [
+            "example.john@example.com"
+        ],
+        "abuse@example.com": [
+            "example.jim@example.com"
+        ],
+        "info": [
+            "info@example.com"
+        ],
+        "info@example.com": [
+            "example.john@example.com",
+            "example.jen@example.com"
+        ]
+    },
+    "s3": {
+        "bucketName": "testBucket",
+        "incoming": {
+            "newPrefix": "in/new/",
+            "spamVirusPrefix": "in/spam-virus/",
+            "forwardedPrefix": "in/forwarded/",
+            "failedPrefix": "in/failed/"
+        },
+        "outgoing": {
+            "sentPrefix": "out/sent/",
+            "failedPrefix": "out/failed/"
+        }
+    }
+}
