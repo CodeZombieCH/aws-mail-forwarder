@@ -32,10 +32,10 @@ Mails sent to your domain and received by AWS SES are forwarded to other mail ad
 
 Example:
 
--            | Original Message                | Forwarded Message
--------------|---------------------------------|-------------------------------------------------------------
-Sender       | "John Doe" <sender@example.com> | "John Doe at sender@example.com" <forwarder@your-domain.tld>
-Recipient(s) | info@your-domain.tld            | your-mail@some-mail-provider.com
+|              | Original Message                | Forwarded Message                                            |
+|--------------|---------------------------------|--------------------------------------------------------------|
+| Sender       | "John Doe" \<sender@example.com\> | "John Doe at sender@example.com" \<forwarder@your-domain.tld\> |
+| Recipient(s) | info@your-domain.tld            | your-mail@some-mail-provider.com                             |
 
 
 ## Limitations
@@ -57,7 +57,7 @@ Messages are only processed and never bounce
 
 ### Limited Support for Multiple From
 
-[RFC 5322](https://www.rfc-editor.org/rfc/rfc5322) allows multiple `From` header, although this is seldomly used in the real world. AWS Mail Forwarder has limited support for multiple from in that rewrites the message to forward by only taking the first `From` header.
+[RFC 5322](https://www.rfc-editor.org/rfc/rfc5322) allows multiple `From` headers, although this is seldomly used in the real world. AWS Mail Forwarder has limited support for multiple `From` headers in that it rewrites the message to forward by only taking the first `From` header.
 
 
 ## Installation
