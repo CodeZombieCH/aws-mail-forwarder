@@ -1,5 +1,7 @@
 # AWS Mail Forwarder
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/codezombiech/aws-mail-forwarder)](https://goreportcard.com/report/github.com/codezombiech/aws-mail-forwarder)
+
 A mail forwarder powered by Amazon Web Services (AWS) written in Go.
 
 This project started as a port of the amazing [aws-lambda-ses-forwarder](https://github.com/arithmetric/aws-lambda-ses-forwarder)
