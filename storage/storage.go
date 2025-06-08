@@ -41,7 +41,7 @@ func (s *Storage) Get(key string) (io.ReadCloser, int64, error) {
 		return nil, 0, fmt.Errorf("failed to get object: %w", err)
 	}
 
-	return result.Body, result.ContentLength, nil
+	return result.Body, *result.ContentLength, nil
 }
 
 func (s *Storage) Put(key string, reader io.Reader) (*string, error) {
