@@ -71,7 +71,7 @@ func sendTestMail(t *testing.T, config testConfig, timestamp int64) {
 		if errors.As(err, &apiErr) {
 			t.Fatalf("code: %s, message: %s, fault: %s", apiErr.ErrorCode(), apiErr.ErrorMessage(), apiErr.ErrorFault().String())
 		} else {
-			t.Fatalf(err.Error())
+			t.Fatalf("%s", err.Error())
 		}
 	}
 }
